@@ -5,7 +5,8 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(VERSION).then(function(cache) {
       return cache.addAll([
-        './start.html',
+        '/',
+        '/*.js',
         './static/jquery.min.js',
         './static/mm1.jpg'
       ]);
@@ -35,6 +36,7 @@ self.addEventListener('fetch', function(event) {
     return fetch(event.request);
   }).then(function(response) {
     caches.open(VERSION).then(function(cache) {
+      
       cache.put(event.request, response);
     });
     return response.clone();
